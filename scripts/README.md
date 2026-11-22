@@ -12,8 +12,14 @@ One-time build of the static region dataset used by the runtime model (issue #1)
 ```bash
 python scripts/build_regions.py                                   # full build -> public/data/
 python scripts/build_regions.py --countries USA,NOR,AUS,RUS --fixture   # fixture -> test/fixtures/
-python -m unittest discover -s scripts -p "test_*.py"            # validate fixture
+python scripts/build_activities.py                               # activities.json (issue #2)
+python scripts/build_curves.py                                    # curves.json (issue #3)
+python -m unittest discover -s scripts -p "test_*.py"            # validate datasets
 ```
+
+## Activity catalog (issue #2)
+
+`scripts/build_activities.py` generates `public/data/activities.json` from a hand-curated table: one entry per counter with `nPerDay` (events per person per day, or hours per day for `kind: "state"` counters with `durationSec: 86400`), `durationSec`, `demographic` (`all` / `adults15plus` / `male15plus` / `female15plus`), `sources` (cited per counter), a human-readable `formula`, and `estimate: true`. Rates follow the table in the idea (`notes:docs/ideas/theworldnow.md`): peeing 6-7/day ~25 s, pooping ~1/day ~5 min, eating 60-135 min/day by country, sex ~7% of adults on an average day for a median 5.4 min (Waldinger 2005; Durex/Natsal/GSS/NSFG), births ~4.3/s and deaths ~1.9/s (UN WPP 2024), Google ~99,000 searches/s, coffee ~2.25 bn cups/day (NCA/ICO), ~1-2 M people airborne (ICAO/FlightRadar24), ~5.5 bn online (DataReportal). Sex-related counters are scoped to the 15+ population from `regions.json`; per-country sex-rate weighting and uncertainty communication remain an open question tracked in issue #10.
 
 Downloads are cached under `data/raw/` (gitignored, ~900 MB); delete that directory to force a re-download. A full build takes ~1 minute.
 

@@ -1,0 +1,838 @@
+[
+  {
+    "id": "sleeping",
+    "label": "Sleeping",
+    "group": "sleep",
+    "kind": "state",
+    "nPerDay": 8.0,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      },
+      {
+        "title": "Eurostat HETUS (Harmonised European Time Use Survey)",
+        "url": "https://ec.europa.eu/eurostat/web/time-use"
+      },
+      {
+        "title": "Our World in Data - Time Use",
+        "url": "https://ourworldindata.org/time-use"
+      }
+    ],
+    "formula": "rate = pop x 8.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "awake",
+    "label": "Awake",
+    "group": "sleep",
+    "kind": "state",
+    "nPerDay": 16.0,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      },
+      {
+        "title": "Eurostat HETUS (Harmonised European Time Use Survey)",
+        "url": "https://ec.europa.eu/eurostat/web/time-use"
+      }
+    ],
+    "formula": "rate = pop x 16.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "dreaming",
+    "label": "Dreaming (REM)",
+    "group": "sleep",
+    "kind": "state",
+    "nPerDay": 1.75,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 1.75/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "waking-now",
+    "label": "Waking up right now",
+    "group": "sleep",
+    "kind": "event",
+    "nPerDay": 1.0,
+    "demographic": "all",
+    "durationSec": 300,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 1.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 300 s",
+    "estimate": true
+  },
+  {
+    "id": "going-to-bed",
+    "label": "Going to bed right now",
+    "group": "sleep",
+    "kind": "event",
+    "nPerDay": 1.0,
+    "demographic": "all",
+    "durationSec": 120,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 1.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 120 s",
+    "estimate": true
+  },
+  {
+    "id": "on-toilet",
+    "label": "On the toilet",
+    "group": "body",
+    "kind": "state",
+    "nPerDay": 0.17,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "BACH study / clinical reference on voiding frequency (6-7x/day)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=urinary+frequency+6-7+times+per+day"
+      },
+      {
+        "title": "Popcol study / Heaton et al. on bowel habit (~1/day, ~5 min)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Heaton+bowel+habit+defecation+frequency"
+      }
+    ],
+    "formula": "rate = pop x 0.17/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "peeing",
+    "label": "Peeing right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 6.5,
+    "demographic": "all",
+    "durationSec": 25,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "BACH study / clinical reference on voiding frequency (6-7x/day)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=urinary+frequency+6-7+times+per+day"
+      }
+    ],
+    "formula": "rate = pop x 6.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 25 s",
+    "estimate": true
+  },
+  {
+    "id": "pooping",
+    "label": "Pooping right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 1.0,
+    "demographic": "all",
+    "durationSec": 300,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Popcol study / Heaton et al. on bowel habit (~1/day, ~5 min)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Heaton+bowel+habit+defecation+frequency"
+      }
+    ],
+    "formula": "rate = pop x 1.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 300 s",
+    "estimate": true
+  },
+  {
+    "id": "showering",
+    "label": "Showering right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 0.7,
+    "demographic": "all",
+    "durationSec": 480,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 0.7/day x dayCurve(localTime, weekday) / 86400; right now = rate x 480 s",
+    "estimate": true
+  },
+  {
+    "id": "washing-hands",
+    "label": "Washing hands right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 8.0,
+    "demographic": "all",
+    "durationSec": 20,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 8.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 20 s",
+    "estimate": true
+  },
+  {
+    "id": "brushing-teeth",
+    "label": "Brushing teeth right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 2.0,
+    "demographic": "all",
+    "durationSec": 120,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 2.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 120 s",
+    "estimate": true
+  },
+  {
+    "id": "sneezing",
+    "label": "Sneezing right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 4.0,
+    "demographic": "all",
+    "durationSec": 2,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 4.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 2 s",
+    "estimate": true
+  },
+  {
+    "id": "coughing",
+    "label": "Coughing right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 10.0,
+    "demographic": "all",
+    "durationSec": 3,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 10.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 3 s",
+    "estimate": true
+  },
+  {
+    "id": "yawning",
+    "label": "Yawning right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 8.0,
+    "demographic": "all",
+    "durationSec": 5,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Physiology reference (StatPearls): blink 15-20/min, breathing 12-20/min, heart rate 60-100/min",
+        "url": "https://www.ncbi.nlm.nih.gov/books/"
+      }
+    ],
+    "formula": "rate = pop x 8.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 5 s",
+    "estimate": true
+  },
+  {
+    "id": "swallowing",
+    "label": "Swallowing right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 1500.0,
+    "demographic": "all",
+    "durationSec": 1,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Physiology reference (StatPearls): blink 15-20/min, breathing 12-20/min, heart rate 60-100/min",
+        "url": "https://www.ncbi.nlm.nih.gov/books/"
+      }
+    ],
+    "formula": "rate = pop x 1500.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 1 s",
+    "estimate": true
+  },
+  {
+    "id": "farting",
+    "label": "Farting right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 15.0,
+    "demographic": "all",
+    "durationSec": 3,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Clinical literature estimate (flatulence ~10-20/day)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=flatulence+frequency+per+day"
+      }
+    ],
+    "formula": "rate = pop x 15.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 3 s",
+    "estimate": true
+  },
+  {
+    "id": "blinking",
+    "label": "Blinking right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 15000.0,
+    "demographic": "all",
+    "durationSec": 0.3,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Physiology reference (StatPearls): blink 15-20/min, breathing 12-20/min, heart rate 60-100/min",
+        "url": "https://www.ncbi.nlm.nih.gov/books/"
+      }
+    ],
+    "formula": "rate = pop x 15000.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 0.3 s",
+    "estimate": true
+  },
+  {
+    "id": "breathing",
+    "label": "Breathing right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 20000.0,
+    "demographic": "all",
+    "durationSec": 4,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Physiology reference (StatPearls): blink 15-20/min, breathing 12-20/min, heart rate 60-100/min",
+        "url": "https://www.ncbi.nlm.nih.gov/books/"
+      }
+    ],
+    "formula": "rate = pop x 20000.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 4 s",
+    "estimate": true
+  },
+  {
+    "id": "heartbeat",
+    "label": "Heartbeats right now",
+    "group": "body",
+    "kind": "event",
+    "nPerDay": 100000.0,
+    "demographic": "all",
+    "durationSec": 0.8,
+    "unit": "beats",
+    "sources": [
+      {
+        "title": "Physiology reference (StatPearls): blink 15-20/min, breathing 12-20/min, heart rate 60-100/min",
+        "url": "https://www.ncbi.nlm.nih.gov/books/"
+      }
+    ],
+    "formula": "rate = pop x 100000.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 0.8 s",
+    "estimate": true
+  },
+  {
+    "id": "eating",
+    "label": "Eating right now",
+    "group": "food",
+    "kind": "state",
+    "nPerDay": 1.5,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      },
+      {
+        "title": "Eurostat HETUS (Harmonised European Time Use Survey)",
+        "url": "https://ec.europa.eu/eurostat/web/time-use"
+      },
+      {
+        "title": "Our World in Data - Time Use",
+        "url": "https://ourworldindata.org/time-use"
+      }
+    ],
+    "formula": "rate = pop x 1.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "taking-a-bite",
+    "label": "Taking a bite right now",
+    "group": "food",
+    "kind": "event",
+    "nPerDay": 250.0,
+    "demographic": "all",
+    "durationSec": 2,
+    "unit": "bites",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      },
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 250.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 2 s",
+    "estimate": true
+  },
+  {
+    "id": "sipping",
+    "label": "Taking a sip right now",
+    "group": "food",
+    "kind": "event",
+    "nPerDay": 50.0,
+    "demographic": "all",
+    "durationSec": 2,
+    "unit": "sips",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 50.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 2 s",
+    "estimate": true
+  },
+  {
+    "id": "drinking-coffee",
+    "label": "Drinking coffee right now",
+    "group": "food",
+    "kind": "event",
+    "nPerDay": 0.28,
+    "demographic": "all",
+    "durationSec": 1200,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "National Coffee Association (US)",
+        "url": "https://www.ncausa.org"
+      },
+      {
+        "title": "International Coffee Organization - ~2.25 bn cups/day globally",
+        "url": "https://www.ico-coffee.org"
+      }
+    ],
+    "formula": "rate = pop x 0.28/day x dayCurve(localTime, weekday) / 86400; right now = rate x 1200 s",
+    "estimate": true
+  },
+  {
+    "id": "cooking",
+    "label": "Cooking right now",
+    "group": "food",
+    "kind": "event",
+    "nPerDay": 0.5,
+    "demographic": "all",
+    "durationSec": 1800,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      },
+      {
+        "title": "Eurostat HETUS (Harmonised European Time Use Survey)",
+        "url": "https://ec.europa.eu/eurostat/web/time-use"
+      }
+    ],
+    "formula": "rate = pop x 0.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 1800 s",
+    "estimate": true
+  },
+  {
+    "id": "sex",
+    "label": "Having sex right now",
+    "group": "sex",
+    "kind": "event",
+    "nPerDay": 0.07,
+    "demographic": "adults15plus",
+    "durationSec": 324,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Waldinger et al. 2005, J Sex Med - IELT median 5.4 min",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15784561/"
+      },
+      {
+        "title": "Durex Global Sex Survey (sex frequency by country)",
+        "url": "https://www.durex.com"
+      },
+      {
+        "title": "Natsal (UK National Survey of Sexual Attitudes and Lifestyles)",
+        "url": "https://www.natsal.ac.uk"
+      },
+      {
+        "title": "GSS (US General Social Survey) sexual frequency",
+        "url": "https://gss.norc.org"
+      },
+      {
+        "title": "NSFG (US National Survey of Family Growth)",
+        "url": "https://www.cdc.gov/nchs/nsfg/index.htm"
+      }
+    ],
+    "formula": "rate = popM15plus + popF15plus x 0.07/day x dayCurve(localTime, weekday) / 86400; right now = rate x 324 s",
+    "estimate": true
+  },
+  {
+    "id": "male-ejaculation",
+    "label": "Male ejaculation right now",
+    "group": "sex",
+    "kind": "event",
+    "nPerDay": 0.06,
+    "demographic": "male15plus",
+    "durationSec": 10,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Waldinger et al. 2005, J Sex Med - IELT median 5.4 min",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15784561/"
+      },
+      {
+        "title": "Durex Global Sex Survey (sex frequency by country)",
+        "url": "https://www.durex.com"
+      },
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = popM15plus x 0.06/day x dayCurve(localTime, weekday) / 86400; right now = rate x 10 s",
+    "estimate": true
+  },
+  {
+    "id": "female-orgasm",
+    "label": "Female orgasm right now",
+    "group": "sex",
+    "kind": "event",
+    "nPerDay": 0.05,
+    "demographic": "female15plus",
+    "durationSec": 20,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Bhat & Shastry 2020, J Sex Med - time to female orgasm ~13 min",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Bhat+Shastry+female+orgasm+time"
+      },
+      {
+        "title": "Durex Global Sex Survey (sex frequency by country)",
+        "url": "https://www.durex.com"
+      },
+      {
+        "title": "Natsal (UK National Survey of Sexual Attitudes and Lifestyles)",
+        "url": "https://www.natsal.ac.uk"
+      }
+    ],
+    "formula": "rate = popF15plus x 0.05/day x dayCurve(localTime, weekday) / 86400; right now = rate x 20 s",
+    "estimate": true
+  },
+  {
+    "id": "kissing",
+    "label": "Kissing right now",
+    "group": "sex",
+    "kind": "event",
+    "nPerDay": 2.0,
+    "demographic": "adults15plus",
+    "durationSec": 10,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = popM15plus + popF15plus x 2.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 10 s",
+    "estimate": true
+  },
+  {
+    "id": "hugging",
+    "label": "Hugging right now",
+    "group": "sex",
+    "kind": "event",
+    "nPerDay": 3.0,
+    "demographic": "all",
+    "durationSec": 15,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 3.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 15 s",
+    "estimate": true
+  },
+  {
+    "id": "online",
+    "label": "Online right now",
+    "group": "screen",
+    "kind": "state",
+    "nPerDay": 16.3,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "DataReportal - Digital 2025 (online population, screen time)",
+        "url": "https://datareportal.com"
+      }
+    ],
+    "formula": "rate = pop x 16.3/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "scrolling-social",
+    "label": "Scrolling social media right now",
+    "group": "screen",
+    "kind": "state",
+    "nPerDay": 1.0,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "DataReportal - Digital 2025 (online population, screen time)",
+        "url": "https://datareportal.com"
+      }
+    ],
+    "formula": "rate = pop x 1.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "watching-video",
+    "label": "Watching video/TV right now",
+    "group": "screen",
+    "kind": "state",
+    "nPerDay": 2.5,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "DataReportal - Digital 2025 (online population, screen time)",
+        "url": "https://datareportal.com"
+      }
+    ],
+    "formula": "rate = pop x 2.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "googling",
+    "label": "Googling right now",
+    "group": "screen",
+    "kind": "event",
+    "nPerDay": 1.05,
+    "demographic": "all",
+    "durationSec": 20,
+    "unit": "searches",
+    "sources": [
+      {
+        "title": "Google published search volume (~99,000 searches/s, ~8.5 bn/day)",
+        "url": "https://blog.google"
+      }
+    ],
+    "formula": "rate = pop x 1.05/day x dayCurve(localTime, weekday) / 86400; right now = rate x 20 s",
+    "estimate": true
+  },
+  {
+    "id": "gaming",
+    "label": "Gaming right now",
+    "group": "screen",
+    "kind": "state",
+    "nPerDay": 0.5,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "DataReportal - Digital 2025 (online population, screen time)",
+        "url": "https://datareportal.com"
+      }
+    ],
+    "formula": "rate = pop x 0.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "driving",
+    "label": "Driving right now",
+    "group": "transport",
+    "kind": "state",
+    "nPerDay": 0.5,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      },
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 0.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "public-transport",
+    "label": "On public transport right now",
+    "group": "transport",
+    "kind": "state",
+    "nPerDay": 0.25,
+    "demographic": "all",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      }
+    ],
+    "formula": "rate = pop x 0.25/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "flying",
+    "label": "In a flight right now",
+    "group": "transport",
+    "kind": "event",
+    "nPerDay": 0.00185,
+    "demographic": "all",
+    "durationSec": 10800,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "ICAO air traffic statistics",
+        "url": "https://www.icao.int"
+      },
+      {
+        "title": "FlightRadar24 - ~10,000-20,000 commercial flights airborne at once",
+        "url": "https://www.flightradar24.com"
+      }
+    ],
+    "formula": "rate = pop x 0.00185/day x dayCurve(localTime, weekday) / 86400; right now = rate x 10800 s",
+    "estimate": true
+  },
+  {
+    "id": "working",
+    "label": "Doing paid work right now",
+    "group": "transport",
+    "kind": "state",
+    "nPerDay": 5.5,
+    "demographic": "adults15plus",
+    "durationSec": 86400,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "ILO - labour force and working time",
+        "url": "https://www.ilo.org"
+      },
+      {
+        "title": "OECD Time Use Database",
+        "url": "https://www.oecd.org/en/topics/time-use.html"
+      }
+    ],
+    "formula": "rate = popM15plus + popF15plus x 5.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "estimate": true
+  },
+  {
+    "id": "born",
+    "label": "Being born right now",
+    "group": "vital",
+    "kind": "event",
+    "nPerDay": 0.0459,
+    "demographic": "all",
+    "durationSec": 60,
+    "unit": "babies",
+    "sources": [
+      {
+        "title": "UN World Population Prospects 2024 (births ~4.3/s, deaths ~1.9/s)",
+        "url": "https://population.un.org/wpp"
+      }
+    ],
+    "formula": "rate = pop x 0.0459/day x dayCurve(localTime, weekday) / 86400; right now = rate x 60 s",
+    "estimate": true
+  },
+  {
+    "id": "died",
+    "label": "Dying right now",
+    "group": "vital",
+    "kind": "event",
+    "nPerDay": 0.0202,
+    "demographic": "all",
+    "durationSec": 60,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "UN World Population Prospects 2024 (births ~4.3/s, deaths ~1.9/s)",
+        "url": "https://population.un.org/wpp"
+      }
+    ],
+    "formula": "rate = pop x 0.0202/day x dayCurve(localTime, weekday) / 86400; right now = rate x 60 s",
+    "estimate": true
+  },
+  {
+    "id": "crying",
+    "label": "Crying right now",
+    "group": "vital",
+    "kind": "event",
+    "nPerDay": 1.0,
+    "demographic": "all",
+    "durationSec": 120,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 1.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 120 s",
+    "estimate": true
+  },
+  {
+    "id": "laughing",
+    "label": "Laughing right now",
+    "group": "vital",
+    "kind": "event",
+    "nPerDay": 10.0,
+    "demographic": "all",
+    "durationSec": 5,
+    "unit": "people",
+    "sources": [
+      {
+        "title": "Expert estimate (no single source)",
+        "url": "https://en.wikipedia.org/wiki/Estimate"
+      }
+    ],
+    "formula": "rate = pop x 10.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 5 s",
+    "estimate": true
+  }
+]
