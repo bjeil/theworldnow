@@ -1,10 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { SvelteMap } from "svelte/reactivity";
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
   import { feature } from "topojson-client";
   import countries110 from "world-atlas/countries-110m.json";
-  import { model, selectedActivity, selectedIso3, tickResult, worldResult } from "../lib/store";
+  import { model, selectedActivity, selectedIso3, worldResult } from "../lib/store";
   import { lang, langs } from "../lib/i18n";
   import type { ActivityTick } from "../lib/model";
 
@@ -27,7 +28,7 @@
   const ACCENT = "76, 194, 255";
 
   function bandRates(value: ActivityTick | undefined): Map<number, number> {
-    const out = new Map<number, number>();
+    const out = new SvelteMap<number, number>();
     if (!value) return out;
     for (const b of bands) {
       let sum = 0;
