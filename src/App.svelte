@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import CounterCard from "./components/CounterCard.svelte";
   import CountryFilter from "./components/CountryFilter.svelte";
+  import WorldMap from "./components/WorldMap.svelte";
   import { fmtLocalTime } from "./lib/format";
   import {
     model,
@@ -81,6 +82,7 @@
   {#if !$model}
     <p>Loading model…</p>
   {:else}
+    <WorldMap />
     {#each groups as g (g.group)}
       <section>
         <h2>{g.title}</h2>

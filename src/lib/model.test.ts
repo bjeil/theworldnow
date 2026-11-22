@@ -86,6 +86,11 @@ describe("model.tick", () => {
       expect(usa.activities[a.id]!.byCountry["USA"]).toBeCloseTo(usa.activities[a.id]!.rate, 6);
     }
     expect(Object.keys(usa.activities["sleeping"]!.byCountry)).toEqual(["USA"]);
+    const byRegionSum = Object.values(world.activities["sleeping"]!.byRegion).reduce(
+      (s, v) => s + v,
+      0,
+    );
+    expect(byRegionSum).toBeCloseTo(world.activities["sleeping"]!.rate, 6);
   });
 
   it("multi-timezone country gets different local hours per region (USA)", () => {
