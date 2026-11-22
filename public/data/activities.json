@@ -22,7 +22,7 @@
         "url": "https://ourworldindata.org/time-use"
       }
     ],
-    "formula": "rate = pop x 8.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 8.0h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -44,7 +44,7 @@
         "url": "https://ec.europa.eu/eurostat/web/time-use"
       }
     ],
-    "formula": "rate = pop x 16.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 16.0h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -62,7 +62,7 @@
         "url": "https://en.wikipedia.org/wiki/Estimate"
       }
     ],
-    "formula": "rate = pop x 1.75/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 1.75h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -120,7 +120,7 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Heaton+bowel+habit+defecation+frequency"
       }
     ],
-    "formula": "rate = pop x 0.17/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 0.17h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -380,7 +380,7 @@
         "url": "https://ourworldindata.org/time-use"
       }
     ],
-    "formula": "rate = pop x 1.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 1.5h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -604,7 +604,7 @@
         "url": "https://datareportal.com"
       }
     ],
-    "formula": "rate = pop x 16.3/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 16.3h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -622,7 +622,7 @@
         "url": "https://datareportal.com"
       }
     ],
-    "formula": "rate = pop x 1.0/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 1.0h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -640,7 +640,7 @@
         "url": "https://datareportal.com"
       }
     ],
-    "formula": "rate = pop x 2.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 2.5h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -676,7 +676,7 @@
         "url": "https://datareportal.com"
       }
     ],
-    "formula": "rate = pop x 0.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 0.5h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -698,7 +698,7 @@
         "url": "https://en.wikipedia.org/wiki/Estimate"
       }
     ],
-    "formula": "rate = pop x 0.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 0.5h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -716,7 +716,7 @@
         "url": "https://www.oecd.org/en/topics/time-use.html"
       }
     ],
-    "formula": "rate = pop x 0.25/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = pop x 0.25h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -760,7 +760,7 @@
         "url": "https://www.oecd.org/en/topics/time-use.html"
       }
     ],
-    "formula": "rate = popM15plus + popF15plus x 5.5/day x dayCurve(localTime, weekday) / 86400; right now = rate x 86400 s",
+    "formula": "right now = popM15plus + popF15plus x 5.5h/24 x dayCurve(localTime, weekday)",
     "estimate": true
   },
   {
@@ -768,7 +768,7 @@
     "label": "Being born right now",
     "group": "vital",
     "kind": "event",
-    "nPerDay": 0.0459,
+    "nPerDay": 4.59e-05,
     "demographic": "all",
     "durationSec": 60,
     "unit": "babies",
@@ -778,7 +778,7 @@
         "url": "https://population.un.org/wpp"
       }
     ],
-    "formula": "rate = pop x 0.0459/day x dayCurve(localTime, weekday) / 86400; right now = rate x 60 s",
+    "formula": "rate = pop x 4.59e-05/day x dayCurve(localTime, weekday) / 86400; right now = rate x 60 s",
     "estimate": true
   },
   {
@@ -786,7 +786,7 @@
     "label": "Dying right now",
     "group": "vital",
     "kind": "event",
-    "nPerDay": 0.0202,
+    "nPerDay": 2.02e-05,
     "demographic": "all",
     "durationSec": 60,
     "unit": "people",
@@ -796,7 +796,7 @@
         "url": "https://population.un.org/wpp"
       }
     ],
-    "formula": "rate = pop x 0.0202/day x dayCurve(localTime, weekday) / 86400; right now = rate x 60 s",
+    "formula": "rate = pop x 2.02e-05/day x dayCurve(localTime, weekday) / 86400; right now = rate x 60 s",
     "estimate": true
   },
   {
