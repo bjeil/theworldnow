@@ -58,6 +58,14 @@ Model: `λ_A,r(t) = pop_r × n_A × f_A(local_time_r, weekday_r) / 86400` per re
 
 Pushes to `main` build and deploy to GitHub Pages (`.github/workflows/deploy.yml`). One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
+## Methodology & transparency
+
+Every counter is an **estimate, not a measurement**: each card links to its formula and sources, and
+`docs/methodology.md` documents the full model (region = country × IANA time zone,
+`λ = pop × nPerDay × dayCurve(localTime, weekday) / 86400`, stock via Little's law). Open questions
+from the idea (stock vs rate as main view, Ramadan/seasonality in curves, taste boundary, per-country
+sex-rate uncertainty, per-timezone breakdown) are tracked there and in issue #10.
+
 ## Issues
 
 The work is tracked as issues #1–#10 (see the issue tracker).

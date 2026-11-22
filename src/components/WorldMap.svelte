@@ -6,6 +6,7 @@
   import { feature } from "topojson-client";
   import countries110 from "world-atlas/countries-110m.json";
   import { model, selectedActivity, selectedIso3, worldResult } from "../lib/store";
+  import { lang, langs } from "../lib/i18n";
   import type { ActivityTick } from "../lib/model";
 
   interface Band {
@@ -21,6 +22,8 @@
   let countryLayer: L.GeoJSON;
   let bands: Band[] = [];
   let lastMapUpdate = 0;
+
+  let d = $derived(langs[$lang]);
 
   const ACCENT = "76, 194, 255";
 
@@ -112,8 +115,7 @@
 <div class="map-wrap">
   <div bind:this={mapEl} class="map" aria-label="World map of current activity"></div>
   <p class="muted map-note">
-    Heatmap: where “{$selectedActivity ?? "sleeping"}” is happening most right now (1° longitude
-    bands). Select a country to highlight and zoom.
+    {d.mapNote}
   </p>
 </div>
 

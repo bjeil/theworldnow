@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Activity, ActivityTick } from "../lib/model";
   import { fmtInt, fmtPct, fmtRate } from "../lib/format";
+  import { lang, langs } from "../lib/i18n";
 
   let {
     activity,
@@ -19,6 +20,8 @@
     open: boolean;
     onToggle: () => void;
   } = $props();
+
+  let d = $derived(langs[$lang]);
 </script>
 
 <div class="wrap">
@@ -26,15 +29,16 @@
     <span class="label">{activity.label}</span>
     <span class="stock">{fmtInt(value?.stock ?? 0)}</span>
     <span class="sub">
-      {fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)} today{#if share !== null}
-        · {fmtPct(share)} of world{/if}
+      {fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)}
+      {d.today}{#if share !== null}
+        · {fmtPct(share)} {d.ofWorld}{/if}
     </span>
   </button>
   {#if open}
     <div class="popover">
-      <strong>How it's estimated</strong>
+      <strong>{d.howEstimated}</strong>
       <code>{activity.formula}</code>
-      <em>Estimate, not a measurement.</em>
+      <em>{d.estimateNote}</em>
       {#if share !== null}
         <span
           >{activity.label} in the selected country is {fmtPct(share)} of the world total ({fmtRate(
@@ -43,14 +47,14 @@
         >
       {/if}
       {#if top10.length > 0}
-        <strong>Top 10 countries right now</strong>
+        <strong>{d.top10}</strong>
         <ol>
           {#each top10 as t (t.name)}
             <li>{t.name}: {fmtRate(t.rate)} /s</li>
           {/each}
         </ol>
       {/if}
-      <strong>Sources</strong>
+      <strong>{d.sources}</strong>
       <ul>
         {#each activity.sources as s (s.url)}
           <li><a href={s.url} target="_blank" rel="noreferrer">{s.title}</a></li>
