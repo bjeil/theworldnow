@@ -42,6 +42,7 @@ export interface ActivityTick {
   stock: number;
   soFarToday: number;
   byCountry: Record<string, number>;
+  byRegion: Record<string, number>;
 }
 
 export interface TickResult {
@@ -143,7 +144,7 @@ export function createModel(data: ModelData): Model {
   function tick(utc: Date, selectedIso3: string | null = null): TickResult {
     const activities: Record<string, ActivityTick> = {};
     for (const a of data.activities) {
-      activities[a.id] = { rate: 0, stock: 0, soFarToday: 0, byCountry: {} };
+      activities[a.id] = { rate: 0, stock: 0, soFarToday: 0, byCountry: {}, byRegion: {} };
     }
     const regions = selectedIso3 ? (byIso3.get(selectedIso3) ?? []) : data.regions;
     for (const r of regions) {
@@ -158,6 +159,8 @@ export function createModel(data: ModelData): Model {
         const t = activities[a.id]!;
         t.rate += contribution;
         t.byCountry[r.iso3] = (t.byCountry[r.iso3] ?? 0) + contribution;
+        const rid = `${r.iso3}|${r.tzid}`;
+        t.byRegion[rid] = (t.byRegion[rid] ?? 0) + contribution;
         let cum = 0;
         const full = Math.min(Math.floor(hour), 23);
         for (let i = 0; i < full; i++) cum += c[i]!;
