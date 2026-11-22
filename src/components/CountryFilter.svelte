@@ -1,7 +1,10 @@
 <script lang="ts">
   import { model, selectedIso3 } from "../lib/store";
+  import { lang, langs } from "../lib/i18n";
 
   let query = $state("");
+
+  let d = $derived(langs[$lang]);
   let open = $state(false);
 
   let countries = $derived(
@@ -47,13 +50,14 @@
     <div class="panel">
       <input
         type="search"
-        placeholder="Search country or ISO3…"
+        placeholder={d.searchCountry}
         bind:value={query}
-        aria-label="Search country"
+        aria-label={d.searchCountry}
+        onkeydown={(e) => e.key === "Escape" && (open = false)}
       />
       <ul role="listbox" aria-label="Countries">
         <li role="option" aria-selected={$selectedIso3 === null}>
-          <button onclick={() => pick(null)}>World</button>
+          <button onclick={() => pick(null)}>{d.world}</button>
         </li>
         {#each filtered.slice(0, 50) as c (c.iso3)}
           <li role="option" aria-selected={$selectedIso3 === c.iso3}>
