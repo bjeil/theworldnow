@@ -1,7 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import CounterCard from "./components/CounterCard.svelte";
-  import { model, selectedActivity, start, stop, tickResult } from "./lib/store";
+  import CountryFilter from "./components/CountryFilter.svelte";
+  import { fmtLocalTime } from "./lib/format";
+  import {
+    model,
+    selectedActivity,
+    selectedIso3,
+    start,
+    stop,
+    tickResult,
+    worldResult,
+  } from "./lib/store";
 
   const groupTitles: Record<string, string> = {
     sleep: "Sleep & circadian",
@@ -25,6 +35,31 @@
         activities: $model!.activities.filter((a) => a.group === g),
       }))
     : [];
+
+  $: tzids = $selectedIso3
+    ? [
+        ...new Set(
+          ($model?.regions ?? []).filter((r) => r.iso3 === $selectedIso3).map((r) => r.tzid),
+        ),
+      ]
+    : [];
+
+  $: top10 =
+    $selectedActivity && $worldResult && $model
+      ? Object.entries($worldResult.activities[$selectedActivity]?.byCountry ?? {})
+          .map(([iso3, rate]) => ({
+            name: $model!.regions.find((r) => r.iso3 === iso3)?.name ?? iso3,
+            rate,
+          }))
+          .sort((a, b) => b.rate - a.rate)
+          .slice(0, 10)
+      : [];
+
+  function shareOf(id: string): number | null {
+    const w = $worldResult?.activities[id]?.rate ?? 0;
+    const v = $tickResult?.activities[id]?.rate ?? 0;
+    return $selectedIso3 && w > 0 ? v / w : null;
+  }
 </script>
 
 <main>
@@ -33,6 +68,16 @@
     What is everyone doing right now? Population-weighted estimates per country × time zone — every
     counter is an <strong>estimate, not a measurement</strong> (click a counter for its formula and sources).
   </p>
+  <div class="toolbar">
+    <CountryFilter />
+    {#if tzids.length > 0 && $tickResult}
+      <span class="tz-times">
+        {#each tzids as tz (tz)}
+          <span class="tz">{tz.replace(/_/g, " ")} {fmtLocalTime($tickResult.utc, tz)}</span>
+        {/each}
+      </span>
+    {/if}
+  </div>
   {#if !$model}
     <p>Loading model…</p>
   {:else}
@@ -44,6 +89,9 @@
             <CounterCard
               activity={a}
               value={$tickResult?.activities[a.id]}
+              worldValue={$worldResult?.activities[a.id]}
+              share={shareOf(a.id)}
+              {top10}
               open={$selectedActivity === a.id}
               onToggle={() => selectedActivity.set($selectedActivity === a.id ? null : a.id)}
             />
@@ -64,6 +112,23 @@
     font-size: 1.1rem;
     color: var(--accent);
     margin: 1.5rem 0 0.5rem;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  .tz-times {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
   }
 
   .grid {

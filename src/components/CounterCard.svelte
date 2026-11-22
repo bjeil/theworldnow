@@ -1,15 +1,21 @@
 <script lang="ts">
   import type { Activity, ActivityTick } from "../lib/model";
-  import { fmtInt, fmtRate } from "../lib/format";
+  import { fmtInt, fmtPct, fmtRate } from "../lib/format";
 
   let {
     activity,
     value,
+    worldValue,
+    share,
+    top10,
     open,
     onToggle,
   }: {
     activity: Activity;
     value: ActivityTick | undefined;
+    worldValue: ActivityTick | undefined;
+    share: number | null;
+    top10: { name: string; rate: number }[];
     open: boolean;
     onToggle: () => void;
   } = $props();
@@ -19,13 +25,32 @@
   <button class="card" class:open aria-expanded={open} onclick={onToggle}>
     <span class="label">{activity.label}</span>
     <span class="stock">{fmtInt(value?.stock ?? 0)}</span>
-    <span class="sub">{fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)} today</span>
+    <span class="sub">
+      {fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)} today{#if share !== null}
+        · {fmtPct(share)} of world{/if}
+    </span>
   </button>
   {#if open}
     <div class="popover">
       <strong>How it's estimated</strong>
       <code>{activity.formula}</code>
       <em>Estimate, not a measurement.</em>
+      {#if share !== null}
+        <span
+          >{activity.label} in the selected country is {fmtPct(share)} of the world total ({fmtRate(
+            worldValue?.rate ?? 0,
+          )}/s worldwide).</span
+        >
+      {/if}
+      {#if top10.length > 0}
+        <strong>Top 10 countries right now</strong>
+        <ol>
+          {#each top10 as t (t.name)}
+            <li>{t.name}: {fmtRate(t.rate)} /s</li>
+          {/each}
+        </ol>
+      {/if}
+      <strong>Sources</strong>
       <ul>
         {#each activity.sources as s (s.url)}
           <li><a href={s.url} target="_blank" rel="noreferrer">{s.title}</a></li>
@@ -101,8 +126,9 @@
     color: var(--accent);
   }
 
-  .popover ul {
+  .popover ul,
+  .popover ol {
     margin: 0;
-    padding-left: 1rem;
+    padding-left: 1.2rem;
   }
 </style>
