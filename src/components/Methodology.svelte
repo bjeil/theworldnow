@@ -7,8 +7,9 @@
 <section class="methodology">
   <h2>{d.methodology}</h2>
   <p>
-    Each counter is a model estimate, computed in your browser every 100 ms —{" "}
-    <strong>{d.estimateNote}</strong>
+    Each counter is a model estimate, computed in your browser every 100 ms — <strong
+      >{d.estimateNote}</strong
+    >
   </p>
   <ul>
     <li>

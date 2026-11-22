@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { SvelteMap } from "svelte/reactivity";
   import CounterCard from "./components/CounterCard.svelte";
   import CountryFilter from "./components/CountryFilter.svelte";
   import Methodology from "./components/Methodology.svelte";
@@ -79,7 +80,7 @@
   );
 
   let shares = $derived.by(() => {
-    const out = new Map<string, number>();
+    const out = new SvelteMap<string, number>();
     if (!$selectedIso3 || !$worldResult || !$tickResult) return out;
     for (const [id, w] of Object.entries($worldResult.activities)) {
       const v = $tickResult.activities[id]?.rate ?? 0;
