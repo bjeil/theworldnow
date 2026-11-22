@@ -69,8 +69,8 @@ ACTIVITIES = [
     {"id": "public-transport", "label": "On public transport right now", "group": "transport", "kind": "state", "nPerDay": 0.25, "durationSec": 86400, "demographic": "all", "unit": "people", "sources": ["oecd"]},
     {"id": "flying", "label": "In a flight right now", "group": "transport", "kind": "event", "nPerDay": 0.00185, "durationSec": 10800, "demographic": "all", "unit": "people", "sources": ["icao", "fr24"]},
     {"id": "working", "label": "Doing paid work right now", "group": "transport", "kind": "state", "nPerDay": 5.5, "durationSec": 86400, "demographic": "adults15plus", "unit": "people", "sources": ["ilo", "oecd"]},
-    {"id": "born", "label": "Being born right now", "group": "vital", "kind": "event", "nPerDay": 0.0459, "durationSec": 60, "demographic": "all", "unit": "babies", "sources": ["unwpp"]},
-    {"id": "died", "label": "Dying right now", "group": "vital", "kind": "event", "nPerDay": 0.0202, "durationSec": 60, "demographic": "all", "unit": "people", "sources": ["unwpp"]},
+    {"id": "born", "label": "Being born right now", "group": "vital", "kind": "event", "nPerDay": 0.0000459, "durationSec": 60, "demographic": "all", "unit": "babies", "sources": ["unwpp"]},
+    {"id": "died", "label": "Dying right now", "group": "vital", "kind": "event", "nPerDay": 0.0000202, "durationSec": 60, "demographic": "all", "unit": "people", "sources": ["unwpp"]},
     {"id": "crying", "label": "Crying right now", "group": "vital", "kind": "event", "nPerDay": 1.0, "durationSec": 120, "demographic": "all", "unit": "people", "sources": ["estimat"]},
     {"id": "laughing", "label": "Laughing right now", "group": "vital", "kind": "event", "nPerDay": 10.0, "durationSec": 5, "demographic": "all", "unit": "people", "sources": ["estimat"]},
 ]
@@ -86,10 +86,15 @@ DEMOGRAPHIC_POP = {
 def main():
     out = []
     for a in ACTIVITIES:
-        formula = (
-            f"rate = {DEMOGRAPHIC_POP[a['demographic']]} x {a['nPerDay']}/day x dayCurve(localTime, weekday) / 86400; "
-            f"right now = rate x {a['durationSec']} s"
-        )
+        if a["kind"] == "state":
+            formula = (
+                f"right now = {DEMOGRAPHIC_POP[a['demographic']]} x {a['nPerDay']}h/24 x dayCurve(localTime, weekday)"
+            )
+        else:
+            formula = (
+                f"rate = {DEMOGRAPHIC_POP[a['demographic']]} x {a['nPerDay']}/day x dayCurve(localTime, weekday) / 86400; "
+                f"right now = rate x {a['durationSec']} s"
+            )
         out.append(
             {
                 "id": a["id"],
