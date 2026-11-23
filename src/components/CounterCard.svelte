@@ -45,6 +45,8 @@
   </button>
   {#if open}
     <div class="popover">
+      <strong>{d.howCalculated}</strong>
+      <p>{activity.explanation}</p>
       <strong>{d.howEstimated}</strong>
       <code>{activity.formula}</code>
       <em>{d.estimateNote}</em>

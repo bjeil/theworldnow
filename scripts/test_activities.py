@@ -19,7 +19,7 @@ class TestActivities(unittest.TestCase):
         for a in self.activities:
             self.assertEqual(
                 set(a),
-                {"id", "label", "group", "kind", "nPerDay", "demographic", "maxOf", "ratePrimary", "durationSec", "unit", "sources", "formula", "estimate"},
+                {"id", "label", "group", "kind", "nPerDay", "demographic", "maxOf", "ratePrimary", "explanation", "durationSec", "unit", "sources", "formula", "estimate"},
             )
             self.assertIn(a["group"], GROUPS)
             self.assertIn(a["kind"], {"event", "state"})
@@ -28,6 +28,7 @@ class TestActivities(unittest.TestCase):
             self.assertGreater(a["durationSec"], 0)
             self.assertTrue(a["estimate"])
             self.assertTrue(a["formula"])
+            self.assertGreater(len(a["explanation"]), 40)
             self.assertGreaterEqual(len(a["sources"]), 1)
             for s in a["sources"]:
                 self.assertIn("title", s)

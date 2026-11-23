@@ -8,6 +8,7 @@
     "demographic": "all",
     "maxOf": "__pop__",
     "ratePrimary": false,
+    "explanation": "We assume people sleep about 8 of 24 hours, concentrated at local night (per-country day curves refine this). \"Right now\" = population x the share of the day spent asleep x how deep into the local night it is.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -36,6 +37,7 @@
     "demographic": "all",
     "maxOf": null,
     "ratePrimary": false,
+    "explanation": "Derived as population minus sleeping, so the two always add up to the total. No separate assumption.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -60,6 +62,7 @@
     "demographic": "all",
     "maxOf": "sleeping",
     "ratePrimary": false,
+    "explanation": "REM sleep is roughly 1.5-2 h of the night. We spread it over the local sleep period and never let it exceed the sleeping counter.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -80,6 +83,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About once a day per person, in the local morning, lasting about 5 minutes.",
     "durationSec": 300,
     "unit": "people",
     "sources": [
@@ -100,6 +104,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About once a day, in the local evening/night, lasting about 2 minutes.",
     "durationSec": 120,
     "unit": "people",
     "sources": [
@@ -120,6 +125,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "People spend about 10 minutes a day on the toilet, peaking after waking and after meals. This is the parent for peeing/pooping.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -144,6 +150,7 @@
     "demographic": "all",
     "maxOf": "on-toilet",
     "ratePrimary": false,
+    "explanation": "The average adult urinates about 6-7 times a day (BACH study), about 25 s each, spread over waking hours with morning/evening peaks. Capped at \"on the toilet\".",
     "durationSec": 25,
     "unit": "people",
     "sources": [
@@ -164,6 +171,7 @@
     "demographic": "all",
     "maxOf": "on-toilet",
     "ratePrimary": false,
+    "explanation": "About once a day, about 5 minutes (Popcol study / Heaton et al.), usually in the morning. Capped at \"on the toilet\".",
     "durationSec": 300,
     "unit": "people",
     "sources": [
@@ -184,6 +192,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 0.7 times a day, about 8 minutes, usually in the morning.",
     "durationSec": 480,
     "unit": "people",
     "sources": [
@@ -204,6 +213,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 8 times a day, about 20 s each (after the toilet, before eating).",
     "durationSec": 20,
     "unit": "people",
     "sources": [
@@ -224,6 +234,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "Twice a day, about 2 minutes, morning and evening.",
     "durationSec": 120,
     "unit": "people",
     "sources": [
@@ -244,6 +255,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "A few times a day, a couple of seconds each. Rough estimate.",
     "durationSec": 2,
     "unit": "people",
     "sources": [
@@ -264,6 +276,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "Around 10 times a day when sick, less otherwise; a few seconds each. Rough estimate.",
     "durationSec": 3,
     "unit": "people",
     "sources": [
@@ -284,6 +297,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 8 times a day, about 5 s, when tired (morning/afternoon/evening peaks).",
     "durationSec": 5,
     "unit": "people",
     "sources": [
@@ -304,6 +318,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "Saliva is swallowed about once a minute while awake (~1,500 times/day), about 1 s each.",
     "durationSec": 1,
     "unit": "people",
     "sources": [
@@ -324,6 +339,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 10-20 times a day (clinical literature estimate), a few seconds each.",
     "durationSec": 3,
     "unit": "people",
     "sources": [
@@ -344,6 +360,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "15-20 blinks per minute while awake (~15,000/day), about 0.3 s each.",
     "durationSec": 0.3,
     "unit": "people",
     "sources": [
@@ -364,6 +381,7 @@
     "demographic": "all",
     "maxOf": null,
     "ratePrimary": true,
+    "explanation": "12-20 breaths per minute (~20,000/day). \"Right now\" counts people mid-inhale (~1.5 s of a ~4 s cycle, so ~35% of people); the per-second rate shown big is the more interesting number.",
     "durationSec": 1.5,
     "unit": "people",
     "sources": [
@@ -384,6 +402,7 @@
     "demographic": "all",
     "maxOf": null,
     "ratePrimary": true,
+    "explanation": "60-100 beats per minute at rest (~100,000/day), ~0.8 s per beat - so about 93% of people are mid-beat at any moment.",
     "durationSec": 0.8,
     "unit": "beats",
     "sources": [
@@ -404,6 +423,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "60-135 minutes a day depending on the country (OECD time-use data), peaking at local breakfast/lunch/dinner times.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -432,6 +452,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 60-110 bites per meal, ~3 meals a day, ~2 s per bite - only while eating.",
     "durationSec": 2,
     "unit": "bites",
     "sources": [
@@ -456,6 +477,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 50 sips of a drink per day, ~2 s each.",
     "durationSec": 2,
     "unit": "sips",
     "sources": [
@@ -476,6 +498,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 2.25 billion cups of coffee are drunk worldwide per day (NCA/ICO), so ~0.28 cups per person per day; a cup takes ~20 min to drink.",
     "durationSec": 1200,
     "unit": "people",
     "sources": [
@@ -500,6 +523,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About half the population cooks on a given day, ~30 min, around meal times.",
     "durationSec": 1800,
     "unit": "people",
     "sources": [
@@ -524,6 +548,7 @@
     "demographic": "adults15plus",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 7% of adults (15+) have sex on an average day (frequency surveys: Durex, Natsal, GSS, NSFG); the median session lasts ~5.4 min (Waldinger et al. 2005). Peaks in the local evening/night.",
     "durationSec": 324,
     "unit": "people",
     "sources": [
@@ -560,6 +585,7 @@
     "demographic": "male15plus",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "Follows the sex rate - about 6% of adult men per day; the ejaculation itself lasts ~5-15 s.",
     "durationSec": 10,
     "unit": "people",
     "sources": [
@@ -588,6 +614,7 @@
     "demographic": "female15plus",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 5% of adult women per day; the orgasm itself lasts tens of seconds (time from penetration to orgasm is ~13 min on average, Bhat & Shastry 2020).",
     "durationSec": 20,
     "unit": "people",
     "sources": [
@@ -616,6 +643,7 @@
     "demographic": "adults15plus",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "A couple of times a day, ~10 s each, mostly in the evening. Estimate.",
     "durationSec": 10,
     "unit": "people",
     "sources": [
@@ -636,6 +664,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 3 times a day, ~15 s each. Estimate.",
     "durationSec": 15,
     "unit": "people",
     "sources": [
@@ -656,6 +685,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About two thirds of the world's population is online (~5.5 bn, DataReportal); averaged over everyone that is ~16 h/day, weighted to local evenings. Never more than \"awake\".",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -676,6 +706,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 1 hour a day on social media (DataReportal), mostly evenings. Never more than \"awake\" or \"online\".",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -696,6 +727,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 2.5 hours a day of video/TV (DataReportal), mostly evenings.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -716,6 +748,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "Google handles ~99,000 searches per second (~8.5 bn/day), i.e. about 1 search per person per day, ~20 s each.",
     "durationSec": 20,
     "unit": "searches",
     "sources": [
@@ -736,6 +769,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 0.5 h/day on games, mostly evenings. Estimate from games-industry usage stats.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -756,6 +790,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 30 min/day per person on average including non-drivers (OECD time-use), with rush-hour peaks. Never more than \"awake\".",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -780,6 +815,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 15 min/day on buses/trains (OECD time-use), rush hours.",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -800,6 +836,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 100,000 commercial flights a day (~1-2 million people airborne, ICAO/FlightRadar24) - about 0.002 flights per person per day, ~3 h average flight.",
     "durationSec": 10800,
     "unit": "people",
     "sources": [
@@ -824,6 +861,7 @@
     "demographic": "adults15plus",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "Paid work averages ~5.5 h/day per adult (ILO/OECD), concentrated on weekdays 8-18 local time, low on weekends. Never more than \"awake\".",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -848,6 +886,7 @@
     "demographic": "all",
     "maxOf": null,
     "ratePrimary": false,
+    "explanation": "UN WPP 2024: about 4.3 babies born per second worldwide, roughly uniform over the day. This is what grows the world-population stat.",
     "durationSec": 60,
     "unit": "babies",
     "sources": [
@@ -868,6 +907,7 @@
     "demographic": "all",
     "maxOf": null,
     "ratePrimary": false,
+    "explanation": "UN WPP 2024: about 1.9 people die per second worldwide, roughly uniform over the day.",
     "durationSec": 60,
     "unit": "people",
     "sources": [
@@ -888,6 +928,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About once a day, ~2 min. Rough estimate.",
     "durationSec": 120,
     "unit": "people",
     "sources": [
@@ -908,6 +949,7 @@
     "demographic": "all",
     "maxOf": "awake",
     "ratePrimary": false,
+    "explanation": "About 10 times a day, ~5 s each. Rough estimate, mostly evenings.",
     "durationSec": 5,
     "unit": "people",
     "sources": [
