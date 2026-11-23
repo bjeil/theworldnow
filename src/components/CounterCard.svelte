@@ -86,9 +86,9 @@
     gap: 0.35rem;
     width: 100%;
     padding: 1rem;
-    border: 1px solid #223041;
+    border: 1px solid var(--border);
     border-radius: 0.75rem;
-    background: #111826;
+    background: var(--card-bg);
     color: var(--fg);
     text-align: left;
     cursor: pointer;
@@ -130,7 +130,7 @@
     padding: 0.75rem;
     border: 1px solid var(--accent);
     border-radius: 0.5rem;
-    background: #0b0f14;
+    background: var(--popover-bg);
     font-size: 0.8rem;
   }
 

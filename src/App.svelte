@@ -13,6 +13,7 @@
     selectedIso3,
     start,
     stop,
+    theme,
     tickResult,
     worldResult,
   } from "./lib/store";
@@ -102,6 +103,9 @@
   <p class="muted">{d.tagline}</p>
   <div class="toolbar">
     <CountryFilter />
+    <button class="tool" onclick={() => theme.set($theme === "dark" ? "light" : "dark")}>
+      {d.themeToggle}
+    </button>
     <button class="tool" onclick={() => (showMethodology = !showMethodology)}>
       {showMethodology ? d.hideMethodology : d.methodology}
     </button>
@@ -162,7 +166,7 @@
     padding: 0.75rem 1rem;
     border: 1px solid var(--accent);
     border-radius: 0.75rem;
-    background: #111826;
+    background: var(--card-bg);
     margin-top: 0.75rem;
   }
 
@@ -194,9 +198,9 @@
 
   .tool {
     padding: 0.5rem 0.9rem;
-    border: 1px solid #223041;
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
-    background: #111826;
+    background: var(--card-bg);
     color: var(--fg);
     font: inherit;
     cursor: pointer;

@@ -4,6 +4,26 @@
   --fg: #e6edf3;
   --muted: #8b98a5;
   --accent: #4cc2ff;
+  --card-bg: #111826;
+  --border: #223041;
+  --hover-bg: #1a2433;
+  --popover-bg: #0b0f14;
+  --map-country-fill: #16202e;
+  --map-country-border: #3a4a5f;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --fg: #16202e;
+  --muted: #5a6a7a;
+  --accent: #0369a1;
+  --card-bg: #f1f5f9;
+  --border: #cbd5e1;
+  --hover-bg: #e2e8f0;
+  --popover-bg: #ffffff;
+  --map-country-fill: #e2e8f0;
+  --map-country-border: #94a3b8;
 }
 
 * {

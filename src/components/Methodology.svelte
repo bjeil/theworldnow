@@ -41,10 +41,10 @@
 
 <style>
   .methodology {
-    border: 1px solid #223041;
+    border: 1px solid var(--border);
     border-radius: 0.75rem;
     padding: 1rem 1.25rem;
-    background: #111826;
+    background: var(--card-bg);
     font-size: 0.9rem;
   }
 
