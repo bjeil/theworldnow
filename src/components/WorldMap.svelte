@@ -12,6 +12,8 @@
   interface Band {
     band: number;
     lonMin: number;
+    latMin: number;
+    latMax: number;
     pop: number;
     regions: string[];
   }

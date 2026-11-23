@@ -304,12 +304,19 @@ def main():
 
     bands = []
     for b in range(360):
-        bands.append({"band": b, "lonMin": b - 180, "pop": 0, "regions": []})
+        bands.append({"band": b, "lonMin": b - 180, "pop": 0, "regions": [], "latMin": 90, "latMax": -90})
     for r in out_regions:
         b = int(np.floor(r["lon"])) + 180
         b = min(359, max(0, b))
         bands[b]["pop"] += r["pop"]
         bands[b]["regions"].append(f"{r['iso3']}|{r['tzid']}")
+        if r["pop"] > 0:
+            bands[b]["latMin"] = min(bands[b]["latMin"], max(-85, r["lat"] - 2))
+            bands[b]["latMax"] = max(bands[b]["latMax"], min(85, r["lat"] + 2))
+
+    for b in bands:
+        if b["latMin"] > b["latMax"]:
+            b["latMin"], b["latMax"] = -85, 85
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
