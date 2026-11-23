@@ -94,7 +94,7 @@
 
   .panel {
     position: absolute;
-    z-index: 20;
+    z-index: 1100;
     top: 100%;
     left: 0;
     width: 18rem;

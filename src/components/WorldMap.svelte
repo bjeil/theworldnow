@@ -127,6 +127,8 @@
   }
 
   .map {
+    position: relative;
+    z-index: 0;
     height: 24rem;
     border: 1px solid #223041;
     border-radius: 0.75rem;
