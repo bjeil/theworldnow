@@ -50,6 +50,7 @@ export interface ActivityTick {
 export interface TickResult {
   utc: number;
   selectedIso3: string | null;
+  worldPopulation: number;
   activities: Record<string, ActivityTick>;
 }
 
@@ -119,6 +120,7 @@ export function popFor(region: Region, demographic: Demographic): number {
 }
 
 export function createModel(data: ModelData): Model {
+  const totalPop = data.regions.reduce((s, r) => s + r.pop, 0);
   const curveCache = new Map<string, Map<string, DayCurve>>();
   const byIso3 = new Map<string, Region[]>();
   for (const r of data.regions) {
@@ -200,7 +202,11 @@ export function createModel(data: ModelData): Model {
         t.byRegion[rid] = (t.byRegion[rid] ?? 0) + m.rate;
       }
     }
-    return { utc: utc.getTime(), selectedIso3, activities };
+    const born = activities["born"]?.rate ?? 0;
+    const died = activities["died"]?.rate ?? 0;
+    const midYear = Date.UTC(utc.getUTCFullYear(), 5, 1);
+    const worldPopulation = totalPop + ((born - died) * (utc.getTime() - midYear)) / 1000;
+    return { utc: utc.getTime(), selectedIso3, worldPopulation, activities };
   }
 
   return { activities: data.activities, regions: data.regions, tick, curveFor, popFor };

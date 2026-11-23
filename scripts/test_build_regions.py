@@ -67,5 +67,17 @@ class TestRegionsFixture(unittest.TestCase):
             self.assertIn(f"{r['iso3']}|{r['tzid']}", self.bands[b]["regions"])
 
 
+    def test_meta_matches_population_sum(self):
+        import json as _json
+
+        for base in (ROOT / "public" / "data", ROOT / "test" / "fixtures"):
+            meta = _json.load(open(base / "meta.json"))
+            regions_file = "regions.json" if base.name == "data" else "regions.sample.json"
+            regions = _json.load(open(base / regions_file))
+            total = sum(r["pop"] for r in regions)
+            self.assertAlmostEqual(total / meta["worldPopulation"], 1.0, places=3)
+            self.assertEqual(meta["regions"], len(regions))
+
+
 if __name__ == "__main__":
     unittest.main()

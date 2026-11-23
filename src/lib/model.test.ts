@@ -145,6 +145,16 @@ describe("model.tick", () => {
     expect(b.rate).toBeLessThan(h.rate);
   });
 
+  it("worldPopulation matches the dataset near mid-year and grows at the net rate", () => {
+    const model = createModel(fixtureData);
+    const midYear = new Date(Date.UTC(2025, 5, 1));
+    const res0 = model.tick(midYear);
+    expect(res0.worldPopulation).toBeCloseTo(sumPop(fixtureData), -4);
+    const res1 = model.tick(new Date(midYear.getTime() + 1000 * 1000));
+    const net = (res0.activities["born"]?.rate ?? 0) - (res0.activities["died"]?.rate ?? 0);
+    expect(res1.worldPopulation - res0.worldPopulation).toBeCloseTo(net * 1000, 3);
+  });
+
   it("world totals are plausible against the full regions dataset", () => {
     const full = createModel({
       regions: realRegions as ModelData["regions"],
