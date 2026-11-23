@@ -5,6 +5,7 @@ import csv
 import gzip
 import json
 import sys
+from datetime import datetime
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -183,6 +184,22 @@ def load_age_sex(path):
     return out
 
 
+def load_total_pop(path, year):
+    totals = {}
+    with gzip.open(path, "rt", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["LocTypeID"] != "4":
+                continue
+            try:
+                if int(row["Time"]) != year:
+                    continue
+                totals[row["ISO3_code"].strip()] = totals.get(row["ISO3_code"].strip(), 0.0) + float(row["PopTotal"]) * 1000.0
+            except ValueError:
+                continue
+    return totals
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--raw-dir", default=str(ROOT / "data" / "raw"))
@@ -226,6 +243,20 @@ def main():
             r["lat"] = lat
             if (i + 1) % 200 == 0:
                 print(f"  zonal stats {i + 1}/{len(regions)}")
+
+    year = datetime.now().year
+    total_pop = load_total_pop(wpp_path, year)
+
+    country_raster = {}
+    for r in regions:
+        country_raster[r["iso3"]] = country_raster.get(r["iso3"], 0.0) + r["pop"]
+    scaled = 0
+    for r in regions:
+        target = total_pop.get(r["iso3"], 0.0)
+        base = country_raster.get(r["iso3"], 0.0)
+        if target > 0 and base > 0:
+            r["pop"] *= target / base
+            scaled += 1
 
     country_pop = {}
     for r in regions:
@@ -282,6 +313,17 @@ def main():
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    meta = {
+        "populationYear": year,
+        "worldPopulation": int(round(sum(r["pop"] for r in regions))),
+        "regions": len(regions),
+    }
+    meta_dir = ROOT / "test" / "fixtures" if args.fixture else out_dir
+    meta_dir.mkdir(parents=True, exist_ok=True)
+    with open(meta_dir / "meta.json", "w") as f:
+        json.dump(meta, f, indent=2)
+        f.write("\n")
+    print(f"population scaled to UN WPP {year} for {scaled} countries; world pop {meta['worldPopulation']:,}")
     if args.fixture:
         fixture_dir = ROOT / "test" / "fixtures"
         fixture_dir.mkdir(parents=True, exist_ok=True)

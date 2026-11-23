@@ -5,7 +5,7 @@
   import CountryFilter from "./components/CountryFilter.svelte";
   import Methodology from "./components/Methodology.svelte";
   import WorldMap from "./components/WorldMap.svelte";
-  import { fmtBig, fmtLocalTime } from "./lib/format";
+  import { fmtBig, fmtLocalTime, fmtRate } from "./lib/format";
   import { en } from "./lib/i18n";
   import {
     model,
@@ -88,6 +88,17 @@
 
 <main>
   <h1>theworldnow</h1>
+  {#if $tickResult}
+    <div class="worldpop">
+      <span class="wp-label">World population</span>
+      <span class="wp-value">{fmtBig($tickResult.worldPopulation)}</span>
+      <span class="wp-sub"
+        >+{fmtRate(
+          ($tickResult.activities["born"]?.rate ?? 0) - ($tickResult.activities["died"]?.rate ?? 0),
+        )}/s · UN WPP estimate, live</span
+      >
+    </div>
+  {/if}
   <p class="muted">{d.tagline}</p>
   <div class="toolbar">
     <CountryFilter />
@@ -141,6 +152,36 @@
     font-size: 1.1rem;
     color: var(--accent);
     margin: 1.5rem 0 0.5rem;
+  }
+
+  .worldpop {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 0.75rem;
+    background: #111826;
+    margin-top: 0.75rem;
+  }
+
+  .wp-label {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .wp-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+  }
+
+  .wp-sub {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
   }
 
   .toolbar {
