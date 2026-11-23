@@ -106,6 +106,32 @@ describe("model.tick", () => {
     expect(model.curveFor("sleeping", "USA")).toBe(curves["sleeping"]!["USA"]);
   });
 
+  it("state counters never exceed their parent (no paradoxes)", () => {
+    const model = createModel(fixtureData);
+    const worldPop = sumPop(fixtureData);
+    const usaPop = fixtureData.regions
+      .filter((r) => r.iso3 === "USA")
+      .reduce((s, r) => s + r.pop, 0);
+    for (let hh = 0; hh < 24; hh++) {
+      const utc = new Date(Date.UTC(2025, 5, 16, hh, 0, 0));
+      for (const [sel, pop] of [
+        [null, worldPop],
+        ["USA", usaPop],
+      ] as const) {
+        const res = model.tick(utc, sel);
+        const a = res.activities;
+        expect(a["online"]!.stock).toBeLessThanOrEqual(a["awake"]!.stock + 1e-6);
+        expect(a["awake"]!.stock).toBeLessThanOrEqual(pop + 1e-6);
+        expect(a["scrolling-social"]!.stock).toBeLessThanOrEqual(a["awake"]!.stock + 1e-6);
+        expect(a["working"]!.stock).toBeLessThanOrEqual(a["awake"]!.stock + 1e-6);
+        expect(a["dreaming"]!.stock).toBeLessThanOrEqual(a["sleeping"]!.stock + 1e-6);
+        expect(a["peeing"]!.stock).toBeLessThanOrEqual(a["on-toilet"]!.stock + 1e-6);
+        expect(a["pooping"]!.stock).toBeLessThanOrEqual(a["on-toilet"]!.stock + 1e-6);
+        expect(a["sleeping"]!.stock + a["awake"]!.stock).toBeCloseTo(pop, -2);
+      }
+    }
+  });
+
   it("world totals are plausible against the full regions dataset", () => {
     const full = createModel({
       regions: realRegions as ModelData["regions"],

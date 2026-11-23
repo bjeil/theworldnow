@@ -19,7 +19,7 @@ class TestActivities(unittest.TestCase):
         for a in self.activities:
             self.assertEqual(
                 set(a),
-                {"id", "label", "group", "kind", "nPerDay", "demographic", "durationSec", "unit", "sources", "formula", "estimate"},
+                {"id", "label", "group", "kind", "nPerDay", "demographic", "maxOf", "durationSec", "unit", "sources", "formula", "estimate"},
             )
             self.assertIn(a["group"], GROUPS)
             self.assertIn(a["kind"], {"event", "state"})
