@@ -59,6 +59,14 @@ class TestRegionsFixture(unittest.TestCase):
         self.assertEqual(sorted(ids), sorted(expected))
         self.assertEqual(sum(b["pop"] for b in self.bands), sum(r["pop"] for r in self.regions))
 
+    def test_bands_have_lat_range(self):
+        for b in self.bands:
+            self.assertIn("latMin", b)
+            self.assertIn("latMax", b)
+            self.assertLessEqual(b["latMin"], b["latMax"])
+            self.assertGreaterEqual(b["latMin"], -85)
+            self.assertLessEqual(b["latMax"], 85)
+
     def test_band_assignment_matches_lon(self):
         import math
 
