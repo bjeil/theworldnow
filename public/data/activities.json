@@ -6,6 +6,7 @@
     "kind": "state",
     "nPerDay": 8.0,
     "demographic": "all",
+    "maxOf": "__pop__",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -32,6 +33,7 @@
     "kind": "state",
     "nPerDay": 16.0,
     "demographic": "all",
+    "maxOf": null,
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -54,6 +56,7 @@
     "kind": "state",
     "nPerDay": 1.75,
     "demographic": "all",
+    "maxOf": "sleeping",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -72,6 +75,7 @@
     "kind": "event",
     "nPerDay": 1.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 300,
     "unit": "people",
     "sources": [
@@ -90,6 +94,7 @@
     "kind": "event",
     "nPerDay": 1.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 120,
     "unit": "people",
     "sources": [
@@ -108,6 +113,7 @@
     "kind": "state",
     "nPerDay": 0.17,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -130,6 +136,7 @@
     "kind": "event",
     "nPerDay": 6.5,
     "demographic": "all",
+    "maxOf": "on-toilet",
     "durationSec": 25,
     "unit": "people",
     "sources": [
@@ -148,6 +155,7 @@
     "kind": "event",
     "nPerDay": 1.0,
     "demographic": "all",
+    "maxOf": "on-toilet",
     "durationSec": 300,
     "unit": "people",
     "sources": [
@@ -166,6 +174,7 @@
     "kind": "event",
     "nPerDay": 0.7,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 480,
     "unit": "people",
     "sources": [
@@ -184,6 +193,7 @@
     "kind": "event",
     "nPerDay": 8.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 20,
     "unit": "people",
     "sources": [
@@ -202,6 +212,7 @@
     "kind": "event",
     "nPerDay": 2.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 120,
     "unit": "people",
     "sources": [
@@ -220,6 +231,7 @@
     "kind": "event",
     "nPerDay": 4.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 2,
     "unit": "people",
     "sources": [
@@ -238,6 +250,7 @@
     "kind": "event",
     "nPerDay": 10.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 3,
     "unit": "people",
     "sources": [
@@ -256,6 +269,7 @@
     "kind": "event",
     "nPerDay": 8.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 5,
     "unit": "people",
     "sources": [
@@ -274,6 +288,7 @@
     "kind": "event",
     "nPerDay": 1500.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 1,
     "unit": "people",
     "sources": [
@@ -292,6 +307,7 @@
     "kind": "event",
     "nPerDay": 15.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 3,
     "unit": "people",
     "sources": [
@@ -310,6 +326,7 @@
     "kind": "event",
     "nPerDay": 15000.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 0.3,
     "unit": "people",
     "sources": [
@@ -328,6 +345,7 @@
     "kind": "event",
     "nPerDay": 20000.0,
     "demographic": "all",
+    "maxOf": null,
     "durationSec": 4,
     "unit": "people",
     "sources": [
@@ -346,6 +364,7 @@
     "kind": "event",
     "nPerDay": 100000.0,
     "demographic": "all",
+    "maxOf": null,
     "durationSec": 0.8,
     "unit": "beats",
     "sources": [
@@ -364,6 +383,7 @@
     "kind": "state",
     "nPerDay": 1.5,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -390,6 +410,7 @@
     "kind": "event",
     "nPerDay": 250.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 2,
     "unit": "bites",
     "sources": [
@@ -412,6 +433,7 @@
     "kind": "event",
     "nPerDay": 50.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 2,
     "unit": "sips",
     "sources": [
@@ -430,6 +452,7 @@
     "kind": "event",
     "nPerDay": 0.28,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 1200,
     "unit": "people",
     "sources": [
@@ -452,6 +475,7 @@
     "kind": "event",
     "nPerDay": 0.5,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 1800,
     "unit": "people",
     "sources": [
@@ -474,6 +498,7 @@
     "kind": "event",
     "nPerDay": 0.07,
     "demographic": "adults15plus",
+    "maxOf": "awake",
     "durationSec": 324,
     "unit": "people",
     "sources": [
@@ -508,6 +533,7 @@
     "kind": "event",
     "nPerDay": 0.06,
     "demographic": "male15plus",
+    "maxOf": "awake",
     "durationSec": 10,
     "unit": "people",
     "sources": [
@@ -534,6 +560,7 @@
     "kind": "event",
     "nPerDay": 0.05,
     "demographic": "female15plus",
+    "maxOf": "awake",
     "durationSec": 20,
     "unit": "people",
     "sources": [
@@ -560,6 +587,7 @@
     "kind": "event",
     "nPerDay": 2.0,
     "demographic": "adults15plus",
+    "maxOf": "awake",
     "durationSec": 10,
     "unit": "people",
     "sources": [
@@ -578,6 +606,7 @@
     "kind": "event",
     "nPerDay": 3.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 15,
     "unit": "people",
     "sources": [
@@ -596,6 +625,7 @@
     "kind": "state",
     "nPerDay": 16.3,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -614,6 +644,7 @@
     "kind": "state",
     "nPerDay": 1.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -632,6 +663,7 @@
     "kind": "state",
     "nPerDay": 2.5,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -650,6 +682,7 @@
     "kind": "event",
     "nPerDay": 1.05,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 20,
     "unit": "searches",
     "sources": [
@@ -668,6 +701,7 @@
     "kind": "state",
     "nPerDay": 0.5,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -686,6 +720,7 @@
     "kind": "state",
     "nPerDay": 0.5,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -708,6 +743,7 @@
     "kind": "state",
     "nPerDay": 0.25,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -726,6 +762,7 @@
     "kind": "event",
     "nPerDay": 0.00185,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 10800,
     "unit": "people",
     "sources": [
@@ -748,6 +785,7 @@
     "kind": "state",
     "nPerDay": 5.5,
     "demographic": "adults15plus",
+    "maxOf": "awake",
     "durationSec": 86400,
     "unit": "people",
     "sources": [
@@ -770,6 +808,7 @@
     "kind": "event",
     "nPerDay": 4.59e-05,
     "demographic": "all",
+    "maxOf": null,
     "durationSec": 60,
     "unit": "babies",
     "sources": [
@@ -788,6 +827,7 @@
     "kind": "event",
     "nPerDay": 2.02e-05,
     "demographic": "all",
+    "maxOf": null,
     "durationSec": 60,
     "unit": "people",
     "sources": [
@@ -806,6 +846,7 @@
     "kind": "event",
     "nPerDay": 1.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 120,
     "unit": "people",
     "sources": [
@@ -824,6 +865,7 @@
     "kind": "event",
     "nPerDay": 10.0,
     "demographic": "all",
+    "maxOf": "awake",
     "durationSec": 5,
     "unit": "people",
     "sources": [

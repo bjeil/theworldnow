@@ -23,6 +23,7 @@ export interface Activity {
   kind: "event" | "state";
   nPerDay: number;
   demographic: Demographic;
+  maxOf?: string | null;
   durationSec: number;
   unit: string;
   sources: ActivitySource[];
@@ -150,27 +151,53 @@ export function createModel(data: ModelData): Model {
     for (const r of regions) {
       const { hour, weekday } = localHour(utc, r.tzid);
       const weekend = weekday === 0 || weekday === 6;
+      const raw = new Map<string, { rate: number; stock: number; soFar: number }>();
       for (const a of data.activities) {
         const pop = popFor(r, a.demographic);
-        if (pop <= 0) continue;
         const c = curveFor(a.id, r.iso3)[weekend ? "weekend" : "weekday"];
         const f = interp(c, hour);
-        const contribution = (pop * a.nPerDay * f) / 86400;
-        const t = activities[a.id]!;
-        t.rate += contribution;
-        t.byCountry[r.iso3] = (t.byCountry[r.iso3] ?? 0) + contribution;
-        const rid = `${r.iso3}|${r.tzid}`;
-        t.byRegion[rid] = (t.byRegion[rid] ?? 0) + contribution;
+        const rate = pop > 0 ? (pop * a.nPerDay * f) / 86400 : 0;
+        const stock = rate * (a.kind === "state" ? 3600 : a.durationSec);
         let cum = 0;
         const full = Math.min(Math.floor(hour), 23);
         for (let i = 0; i < full; i++) cum += c[i]!;
         cum += (c[full]! * (1 - (hour - full)) + c[(full + 1) % 24]! * (hour - full)) * 0.5;
-        t.soFarToday += (pop * a.nPerDay * cum) / 24;
+        raw.set(a.id, { rate, stock, soFar: (pop * a.nPerDay * cum) / 24 });
       }
-    }
-    for (const a of data.activities) {
-      const t = activities[a.id]!;
-      t.stock = t.rate * (a.kind === "state" ? 3600 : a.durationSec);
+      const sleeping = raw.get("sleeping")!;
+      const awakeStock = Math.max(0, popFor(r, "all") - sleeping.stock);
+      raw.set("awake", {
+        rate: awakeStock / 3600,
+        stock: awakeStock,
+        soFar: raw.get("awake")?.soFar ?? 0,
+      });
+      for (const a of data.activities) {
+        const m = raw.get(a.id)!;
+        if (!a.maxOf) continue;
+        const parentStock =
+          a.maxOf === "__pop__"
+            ? popFor(r, a.demographic)
+            : (raw.get(a.maxOf)?.stock ?? Number.POSITIVE_INFINITY);
+        if (m.stock > parentStock) {
+          if (a.kind === "state") {
+            m.rate = parentStock / 3600;
+            m.stock = parentStock;
+          } else if (a.durationSec > 0) {
+            m.stock = parentStock;
+            m.rate = parentStock / a.durationSec;
+          }
+        }
+      }
+      for (const a of data.activities) {
+        const m = raw.get(a.id)!;
+        const t = activities[a.id]!;
+        t.rate += m.rate;
+        t.stock += m.stock;
+        t.soFarToday += m.soFar;
+        t.byCountry[r.iso3] = (t.byCountry[r.iso3] ?? 0) + m.rate;
+        const rid = `${r.iso3}|${r.tzid}`;
+        t.byRegion[rid] = (t.byRegion[rid] ?? 0) + m.rate;
+      }
     }
     return { utc: utc.getTime(), selectedIso3, activities };
   }

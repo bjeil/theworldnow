@@ -29,6 +29,10 @@ S_A(t)   = λ_A(t) × duration_A              ("right now", Little's law L = λ�
   `S_A = Σ_r pop_r × n_A/24 × f_A` (share of the day in that state), so states never exceed the
   population.
 - "So far today" integrates each region's curve from its own local midnight.
+- Consistency: counters are hierarchical per region (`maxOf` in `activities.json`) — `awake` is
+  derived as `population − sleeping`, and every activity that can only happen while awake (online,
+  eating, working, driving, sex, on-toilet, ...) is clamped to `awake`; `dreaming` ≤ `sleeping`,
+  `peeing`/`pooping` ≤ `on-toilet`. So e.g. "online" can never exceed "awake".
 - Country filter: re-sums only that country's regions in the same tick — purely client-side.
 - The map aggregates regions into 360 one-degree longitude bands (`bands.json`) via their
   population-weighted centroids.
