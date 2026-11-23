@@ -11,7 +11,7 @@ let timer: ReturnType<typeof setInterval> | null = null;
 let worker: Worker | null = null;
 
 export async function start(): Promise<void> {
-  const baseUrl = import.meta.env.BASE_URL;
+  const baseUrl = new URL(import.meta.env.BASE_URL, window.location.href).href;
   if (typeof Worker !== "undefined") {
     worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module" });
     worker.onmessage = (e: MessageEvent) => {
