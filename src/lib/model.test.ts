@@ -141,7 +141,7 @@ describe("model.tick", () => {
     expect(b.stock).not.toBeCloseTo(h.stock, 3);
     expect(b.stock).toBeLessThanOrEqual(pop);
     expect(h.stock).toBeLessThanOrEqual(pop);
-    expect(h.stock).toBeCloseTo(pop * 0.9259, -4);
+    expect(h.stock).toBeCloseTo((pop * 100000 * 0.8) / 86400, -3);
     expect(b.rate).toBeLessThan(h.rate);
   });
 
