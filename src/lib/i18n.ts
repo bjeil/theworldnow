@@ -8,6 +8,8 @@ export const en: Record<string, string> = {
   methodology: "Methodology",
   hideMethodology: "Hide methodology",
   howEstimated: "How it's estimated",
+  howCalculated: "How we calculate this",
+  assumptions: "Assumptions",
   estimateNote: "Estimate, not a measurement.",
   sources: "Sources",
   top10: "Top 10 countries right now",

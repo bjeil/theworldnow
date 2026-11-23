@@ -25,6 +25,7 @@ export interface Activity {
   demographic: Demographic;
   maxOf?: string | null;
   ratePrimary?: boolean;
+  explanation?: string;
   durationSec: number;
   unit: string;
   sources: ActivitySource[];
