@@ -1,10 +1,10 @@
 <script lang="ts">
   import { model, selectedIso3 } from "../lib/store";
-  import { lang, langs } from "../lib/i18n";
+  import { en } from "../lib/i18n";
 
   let query = $state("");
 
-  let d = $derived(langs[$lang]);
+  const d = en;
   let open = $state(false);
 
   let countries = $derived(

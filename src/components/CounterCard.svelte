@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Activity, ActivityTick } from "../lib/model";
   import { fmtInt, fmtPct, fmtRate } from "../lib/format";
-  import { lang, langs } from "../lib/i18n";
+  import { en } from "../lib/i18n";
 
   let {
     activity,
@@ -21,7 +21,7 @@
     onToggle: () => void;
   } = $props();
 
-  let d = $derived(langs[$lang]);
+  const d = en;
 </script>
 
 <div class="wrap">

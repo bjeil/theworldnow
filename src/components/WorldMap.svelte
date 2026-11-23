@@ -6,7 +6,7 @@
   import { feature } from "topojson-client";
   import countries110 from "world-atlas/countries-110m.json";
   import { model, selectedActivity, selectedIso3, worldResult } from "../lib/store";
-  import { lang, langs } from "../lib/i18n";
+  import { en } from "../lib/i18n";
   import type { ActivityTick } from "../lib/model";
 
   interface Band {
@@ -23,7 +23,7 @@
   let bands: Band[] = [];
   let lastMapUpdate = 0;
 
-  let d = $derived(langs[$lang]);
+  const d = en;
 
   const ACCENT = "76, 194, 255";
 
