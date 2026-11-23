@@ -24,6 +24,7 @@ export interface Activity {
   nPerDay: number;
   demographic: Demographic;
   maxOf?: string | null;
+  ratePrimary?: boolean;
   durationSec: number;
   unit: string;
   sources: ActivitySource[];

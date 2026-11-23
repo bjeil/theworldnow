@@ -132,6 +132,19 @@ describe("model.tick", () => {
     }
   });
 
+  it("breathing and heartbeat differ and stay within population", () => {
+    const model = createModel(fixtureData);
+    const res = model.tick(new Date("2025-06-16T12:00:00Z"));
+    const b = res.activities["breathing"]!;
+    const h = res.activities["heartbeat"]!;
+    const pop = sumPop(fixtureData);
+    expect(b.stock).not.toBeCloseTo(h.stock, 3);
+    expect(b.stock).toBeLessThanOrEqual(pop);
+    expect(h.stock).toBeLessThanOrEqual(pop);
+    expect(h.stock).toBeCloseTo(pop * 0.9259, -4);
+    expect(b.rate).toBeLessThan(h.rate);
+  });
+
   it("world totals are plausible against the full regions dataset", () => {
     const full = createModel({
       regions: realRegions as ModelData["regions"],

@@ -27,12 +27,21 @@
 <div class="wrap">
   <button class="card" class:open aria-expanded={open} onclick={onToggle}>
     <span class="label">{activity.label}</span>
-    <span class="stock">{fmtInt(value?.stock ?? 0)}</span>
-    <span class="sub">
-      {fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)}
-      {d.today}{#if share !== null}
-        · {fmtPct(share)} {d.ofWorld}{/if}
-    </span>
+    {#if activity.ratePrimary}
+      <span class="stock">{fmtRate(value?.rate ?? 0)} /s</span>
+      <span class="sub">
+        {fmtInt(value?.stock ?? 0)} right now · {fmtInt(value?.soFarToday ?? 0)}
+        {d.today}{#if share !== null}
+          · {fmtPct(share)} {d.ofWorld}{/if}
+      </span>
+    {:else}
+      <span class="stock">{fmtInt(value?.stock ?? 0)}</span>
+      <span class="sub">
+        {fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)}
+        {d.today}{#if share !== null}
+          · {fmtPct(share)} {d.ofWorld}{/if}
+      </span>
+    {/if}
   </button>
   {#if open}
     <div class="popover">
