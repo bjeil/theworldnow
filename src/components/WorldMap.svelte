@@ -4,7 +4,7 @@
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
   import { feature } from "topojson-client";
-  import countries110 from "world-atlas/countries-110m.json";
+  import countries110 from "world-atlas/countries-50m.json";
   import { model, selectedActivity, selectedIso3, worldResult } from "../lib/store";
   import { en } from "../lib/i18n";
   import type { ActivityTick } from "../lib/model";
