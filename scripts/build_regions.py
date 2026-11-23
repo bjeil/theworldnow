@@ -19,7 +19,7 @@ from shapely.strtree import STRtree
 
 ROOT = Path(__file__).resolve().parent.parent
 
-NE_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/9380cca83db5f9aef52d5e762765100745f84b27/geojson/ne_110m_admin_0_countries.geojson"
+NE_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/9380cca83db5f9aef52d5e762765100745f84b27/geojson/ne_50m_admin_0_countries.geojson"
 TZ_URL = "https://github.com/evansiroky/timezone-boundary-builder/releases/download/2024a/timezones.geojson.zip"
 GHSL_URL = "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2020_GLOBE_R2023A_4326_30ss/V1-0/GHS_POP_E2020_GLOBE_R2023A_4326_30ss_V1_0.zip"
 WPP_URL = "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz"
@@ -209,7 +209,7 @@ def main():
     args = ap.parse_args()
 
     raw = Path(args.raw_dir)
-    ne_path = download(NE_URL, raw / "ne_110m_admin_0_countries.geojson")
+    ne_path = download(NE_URL, raw / "ne_50m_admin_0_countries.geojson")
     tz_path = download(TZ_URL, raw / "timezones-2024a.geojson.zip")
     ghsl_zip = download(GHSL_URL, raw / "GHS_POP_E2020_GLOBE_R2023A_4326_30ss_V1_0.zip")
     wpp_path = download(WPP_URL, raw / "WPP2024_PopulationByAge5GroupSex_Medium.csv.gz")

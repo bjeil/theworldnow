@@ -67,6 +67,15 @@ class TestRegionsFixture(unittest.TestCase):
             self.assertIn(f"{r['iso3']}|{r['tzid']}", self.bands[b]["regions"])
 
 
+    def test_small_countries_present(self):
+        import json as _json
+
+        with open(ROOT / "public" / "data" / "regions.json") as f:
+            isos = {r["iso3"] for r in _json.load(f)}
+        for small in ("SGP", "LUX", "MCO", "VAT", "MLT", "AND", "LIE", "SMR", "BRB", "VUT"):
+            self.assertIn(small, isos)
+        self.assertGreaterEqual(len(isos), 230)
+
     def test_meta_matches_population_sum(self):
         import json as _json
 
