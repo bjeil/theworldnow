@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Activity, ActivityTick } from "../lib/model";
-  import { fmtBig, fmtInt, fmtPct, fmtRate } from "../lib/format";
+  import { fmtBig, fmtPct, fmtRate } from "../lib/format";
   import { en } from "../lib/i18n";
 
   let {
