@@ -7,6 +7,26 @@ export const worldResult = writable<TickResult | null>(null);
 export const selectedIso3 = writable<string | null>(null);
 export const selectedActivity = writable<string | null>(null);
 
+export type Theme = "dark" | "light";
+
+function initialTheme(): Theme {
+  if (typeof localStorage !== "undefined") {
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark" || saved === "light") return saved;
+  }
+  if (typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: light)").matches) {
+    return "light";
+  }
+  return "dark";
+}
+
+export const theme = writable<Theme>(initialTheme());
+
+theme.subscribe((t) => {
+  if (typeof document !== "undefined") document.documentElement.dataset.theme = t;
+  if (typeof localStorage !== "undefined") localStorage.setItem("theme", t);
+});
+
 let timer: ReturnType<typeof setInterval> | null = null;
 let worker: Worker | null = null;
 

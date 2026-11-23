@@ -80,9 +80,9 @@
 
   .toggle {
     padding: 0.5rem 0.9rem;
-    border: 1px solid #223041;
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
-    background: #111826;
+    background: var(--card-bg);
     color: var(--fg);
     font: inherit;
     cursor: pointer;
@@ -102,7 +102,7 @@
     overflow: auto;
     border: 1px solid var(--accent);
     border-radius: 0.5rem;
-    background: #0b0f14;
+    background: var(--popover-bg);
     padding: 0.5rem;
   }
 
@@ -110,9 +110,9 @@
     width: 100%;
     padding: 0.4rem 0.6rem;
     margin-bottom: 0.4rem;
-    border: 1px solid #223041;
+    border: 1px solid var(--border);
     border-radius: 0.4rem;
-    background: #111826;
+    background: var(--card-bg);
     color: var(--fg);
     font: inherit;
   }
@@ -136,7 +136,7 @@
   }
 
   li button:hover {
-    background: #1a2433;
+    background: var(--hover-bg);
   }
 
   .empty {

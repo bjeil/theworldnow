@@ -5,7 +5,7 @@
   import "leaflet/dist/leaflet.css";
   import { feature } from "topojson-client";
   import countries110 from "world-atlas/countries-50m.json";
-  import { model, selectedActivity, selectedIso3, worldResult } from "../lib/store";
+  import { model, selectedActivity, selectedIso3, theme, worldResult } from "../lib/store";
   import { en } from "../lib/i18n";
   import type { ActivityTick } from "../lib/model";
 
@@ -20,6 +20,13 @@
 
   let mapEl: HTMLDivElement;
   let map: L.Map;
+  let tileLayer: L.TileLayer | undefined;
+
+  function tileUrl(): string {
+    return $theme === "light"
+      ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+      : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  }
   let bandLayers: L.Rectangle[] = [];
   let countryLayer: L.GeoJSON;
   let bands: Band[] = [];
@@ -64,7 +71,12 @@
               [-85, band.lonMin],
               [85, band.lonMin + 1],
             ],
-            { color: "#223041", weight: 0, fillColor: `rgba(${ACCENT}, 0.05)`, fillOpacity: 1 },
+            {
+              color: "var(--border)",
+              weight: 0,
+              fillColor: `rgba(${ACCENT}, 0.05)`,
+              fillOpacity: 1,
+            },
           ).addTo(map);
           bandLayers[band.band] = rect;
         }
@@ -75,8 +87,17 @@
     };
     const countries = feature(topo, topo.objects.countries);
     countryLayer = L.geoJSON(countries, {
-      style: { color: "#3a4a5f", weight: 1, fillColor: "#16202e", fillOpacity: 0.6 },
+      style: {
+        color: "var(--map-country-border)",
+        weight: 1,
+        fillColor: "var(--map-country-fill)",
+        fillOpacity: 0.6,
+      },
     }).addTo(map);
+  });
+
+  $effect(() => {
+    if (tileLayer) tileLayer.setUrl(tileUrl());
   });
 
   $effect(() => {
@@ -105,7 +126,12 @@
       (layer as L.Polygon).setStyle(
         match
           ? { color: "#4cc2ff", weight: 2, fillColor: "#4cc2ff", fillOpacity: 0.35 }
-          : { color: "#3a4a5f", weight: 1, fillColor: "#16202e", fillOpacity: 0.6 },
+          : {
+              color: "var(--map-country-border)",
+              weight: 1,
+              fillColor: "var(--map-country-fill)",
+              fillOpacity: 0.6,
+            },
       );
       if (match) {
         map.fitBounds((layer as L.Polygon).getBounds(), { padding: [20, 20] });
@@ -130,7 +156,7 @@
     position: relative;
     z-index: 0;
     height: 24rem;
-    border: 1px solid #223041;
+    border: 1px solid var(--border);
     border-radius: 0.75rem;
   }
 

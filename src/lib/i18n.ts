@@ -14,6 +14,7 @@ export const en: Record<string, string> = {
   sources: "Sources",
   top10: "Top 10 countries right now",
   loading: "Loading model…",
+  themeToggle: "Switch to light theme",
   mapNote:
     "Heatmap: where the selected activity is happening most right now (1° longitude bands). Select a country to highlight and zoom.",
 };
