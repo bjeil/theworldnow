@@ -5,7 +5,7 @@
   import CountryFilter from "./components/CountryFilter.svelte";
   import Methodology from "./components/Methodology.svelte";
   import WorldMap from "./components/WorldMap.svelte";
-  import { fmtInt, fmtLocalTime } from "./lib/format";
+  import { fmtBig, fmtLocalTime } from "./lib/format";
   import { en } from "./lib/i18n";
   import {
     model,
@@ -82,7 +82,7 @@
     if (!$tickResult || !$model) return "";
     const sec = Math.floor($tickResult.utc / 1000);
     const label = $model.activities.find((a) => a.id === "sleeping")?.label ?? "sleeping";
-    return `${label}: ${fmtInt($tickResult.activities["sleeping"]?.stock ?? 0)} (${sec})`;
+    return `${label}: ${fmtBig($tickResult.activities["sleeping"]?.stock ?? 0)} (${sec})`;
   });
 </script>
 

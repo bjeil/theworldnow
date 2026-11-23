@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Activity, ActivityTick } from "../lib/model";
-  import { fmtInt, fmtPct, fmtRate } from "../lib/format";
+  import { fmtBig, fmtPct, fmtRate } from "../lib/format";
   import { en } from "../lib/i18n";
 
   let {
@@ -30,14 +30,14 @@
     {#if activity.ratePrimary}
       <span class="stock">{fmtRate(value?.rate ?? 0)} /s</span>
       <span class="sub">
-        {fmtInt(value?.stock ?? 0)} right now · {fmtInt(value?.soFarToday ?? 0)}
+        {fmtBig(value?.stock ?? 0)} right now · {fmtBig(value?.soFarToday ?? 0)}
         {d.today}{#if share !== null}
           · {fmtPct(share)} {d.ofWorld}{/if}
       </span>
     {:else}
-      <span class="stock">{fmtInt(value?.stock ?? 0)}</span>
+      <span class="stock">{fmtBig(value?.stock ?? 0)}</span>
       <span class="sub">
-        {fmtRate(value?.rate ?? 0)} /s · {fmtInt(value?.soFarToday ?? 0)}
+        {fmtRate(value?.rate ?? 0)} /s · {fmtBig(value?.soFarToday ?? 0)}
         {d.today}{#if share !== null}
           · {fmtPct(share)} {d.ofWorld}{/if}
       </span>
