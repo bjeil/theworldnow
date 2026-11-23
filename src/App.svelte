@@ -6,7 +6,7 @@
   import Methodology from "./components/Methodology.svelte";
   import WorldMap from "./components/WorldMap.svelte";
   import { fmtInt, fmtLocalTime } from "./lib/format";
-  import { lang, langs } from "./lib/i18n";
+  import { en } from "./lib/i18n";
   import {
     model,
     selectedActivity,
@@ -17,25 +17,14 @@
     worldResult,
   } from "./lib/store";
 
-  const groupTitles: Record<string, Record<string, string>> = {
-    en: {
-      sleep: "Sleep & circadian",
-      body: "Toilet & body",
-      food: "Food & drink",
-      sex: "Sex & intimacy",
-      screen: "Screen & internet",
-      transport: "Transport & work",
-      vital: "Birth, death & emotion",
-    },
-    no: {
-      sleep: "Søvn & døgnrytme",
-      body: "Do og kropp",
-      food: "Mat og drikke",
-      sex: "Sex og intimitet",
-      screen: "Skjerm og nett",
-      transport: "Transport og jobb",
-      vital: "Fødsel, død og følelser",
-    },
+  const groupTitles: Record<string, string> = {
+    sleep: "Sleep & circadian",
+    body: "Toilet & body",
+    food: "Food & drink",
+    sex: "Sex & intimacy",
+    screen: "Screen & internet",
+    transport: "Transport & work",
+    vital: "Birth, death & emotion",
   };
 
   let showMethodology = $state(false);
@@ -45,13 +34,13 @@
     return stop;
   });
 
-  let d = $derived(langs[$lang]);
+  const d = en;
 
   let groups = $derived(
     $model
       ? [...new Set($model.activities.map((a) => a.group))].map((g) => ({
           group: g,
-          title: groupTitles[$lang]?.[g] ?? g,
+          title: groupTitles[g] ?? g,
           activities: $model.activities.filter((a) => a.group === g),
         }))
       : [],
@@ -104,9 +93,6 @@
     <CountryFilter />
     <button class="tool" onclick={() => (showMethodology = !showMethodology)}>
       {showMethodology ? d.hideMethodology : d.methodology}
-    </button>
-    <button class="tool" onclick={() => lang.set($lang === "en" ? "no" : "en")}>
-      {$lang === "en" ? "Norsk" : "English"}
     </button>
     {#if tzids.length > 0 && $tickResult}
       <span class="tz-times">

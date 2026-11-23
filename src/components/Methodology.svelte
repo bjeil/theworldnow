@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { lang, langs } from "../lib/i18n";
+  import { en } from "../lib/i18n";
 
-  $: d = langs[$lang];
+  const d = en;
 </script>
 
 <section class="methodology">
