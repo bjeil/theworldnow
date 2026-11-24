@@ -1,5 +1,16 @@
 # theworldnow — project review
 
+**Review date: 2026-11-24.**
+
+> **Qualification:** This is a preliminary review, not a source-verified scientific audit. Numerical benchmarks, domain pricing, source and licensing claims, and implementation estimates below require independent verification. Recommendations are proposals, not established fixes. In particular:
+>
+> - Integrating the linearly interpolated curve requires trapezoids for **whole hours as well as partial hours**; the formula in finding 1 is incomplete.
+> - A change in the number asleep is a **net change**, not the rate of people falling asleep. Entries and exits cannot be recovered from the net alone.
+> - Sex-event rates depend on whether the input is per person or per act; participant counts, acts, and duration must be defined and sourced before applying a factor of two. The numerical estimates below are not verified.
+> - Online activities can overlap: each may be a subset of online without their sum being bounded by online. Do not treat the suggested sum invariant as valid.
+> - Small timezone intersections are not necessarily errors; investigate boundary discrepancies before merging any regions. The statement about OSM tile-policy violation is not established by the code alone; assess the actual usage against the policy.
+> - The registrar pricing below is not a quote, and Cloudflare Registrar's registration and nameserver requirements must be checked before choosing it.
+
 Scope: model/measures, map, site presentation, new measures, other improvements, domain.
 Method: read all source, data and docs; ran the model headlessly (vitest probes, not committed) at several UTC times and for single regions; ran lint/format/check/tests/build (all green: 19 tests pass; the bundle is 981 kB JS / 306 kB gzip).
 Limits: the review sandbox has no outbound network, so I did not view the live site or map tiles, and **could not check the domain live** (see §7).
